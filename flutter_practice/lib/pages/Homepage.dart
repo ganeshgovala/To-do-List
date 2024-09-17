@@ -3,6 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_practice/pages/TaskPage.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({super.key});
@@ -82,18 +83,23 @@ class _HomePageState extends State<HomePage> {
                           borderRadius: BorderRadius.circular(16),
                           color: const Color.fromARGB(255, 255, 245, 230),
                         ),
-                        child: ListTile(
-                          contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                          title: Text(data.docs[index]['task'].toString()[0].toUpperCase() + data.docs[index]['task'].toString().substring(1, data.docs[index]['task'].toString().length),
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500,
-                                      ),),
-                          trailing: IconButton(
-                            onPressed: () {
-                              deleteTask(data.docs[index].id);
-                            }, 
-                            icon: Icon(Icons.delete_outlined)
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => TaskPage()));
+                          },
+                          child: ListTile(
+                            contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                            title: Text(data.docs[index]['task'].toString()[0].toUpperCase() + data.docs[index]['task'].toString().substring(1, data.docs[index]['task'].toString().length),
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                        ),),
+                            trailing: IconButton(
+                              onPressed: () {
+                                deleteTask(data.docs[index].id);
+                              }, 
+                              icon: Icon(Icons.delete_outlined)
+                            ),
                           ),
                         ),
                       );
