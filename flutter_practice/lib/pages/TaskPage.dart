@@ -75,9 +75,33 @@ class _TaskPageState extends State<TaskPage> {
                   final data = snapshot.data;
                   if(data != null && data.get('desc') != null) {
                     return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(data.get('desc')),
-                        Icon(Icons.edit),
+                        Container(
+                          width: MediaQuery.of(context).size.width / 1.35,
+                          child: Text(data.get('desc'))
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            showDialog(context: context, builder: (context) => AlertDialog(
+                              title: Text("Add Description"),
+                              content: TextField(
+                                controller: widget._descController,
+                                decoration: InputDecoration(
+                                  hintText: "Description",
+                                ),
+                              ),
+                              actions: [
+                                TextButton(onPressed: () {
+                                  print("Pressed");
+                                  addDesc(widget.id);
+                                  Navigator.pop(context);
+                                }, child: Text("Add"))
+                              ],
+                            ));
+                          },
+                          icon: Icon(Icons.edit, size: 18),
+                        ),
                       ],
                     );
                   }
