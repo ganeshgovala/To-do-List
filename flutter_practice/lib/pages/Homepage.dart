@@ -1,5 +1,7 @@
 // ignore_for_file: unused_field, unused_import, must_be_immutable
 
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +13,11 @@ class HomePage extends StatefulWidget {
 
   Stream<QuerySnapshot> getTasks() {
     return FirebaseFirestore.instance.collection('tasks').snapshots();
+  }
+
+  Future<DocumentSnapshot> getDate(String id) async {
+    DocumentSnapshot data = await FirebaseFirestore.instance.collection('tasks').doc(id).get();
+    return data;
   }
 
   @override
