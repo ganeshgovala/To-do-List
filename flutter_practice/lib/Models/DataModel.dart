@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class Datamodel {
-  Future<void> addData(String taskName, String? description, TimeOfDay? time, Timestamp date) async {
+  Future<void> addData(String taskName, String? description, String? time, Timestamp date) async {
     CollectionReference data = await FirebaseFirestore.instance.collection('tasks');
     data.add({
       'taskName' : taskName,

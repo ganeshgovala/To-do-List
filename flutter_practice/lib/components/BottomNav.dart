@@ -69,7 +69,10 @@ class _BottomNavState extends State<BottomNav> {
                 TextButton(
                   onPressed: () {
                     if(widget._taskController.text.isNotEmpty) {
-                      Datamodel().addData(widget._taskController.text, null, null, Timestamp.now());
+                      Datamodel().addData(widget._taskController.text, null,
+                      _selectedTime != null 
+                      ? _selectedTime!.format(context).toString()
+                      : null, Timestamp.now());
                       widget._taskController.text = "";
                     }
                     Navigator.pop(context);
@@ -77,7 +80,7 @@ class _BottomNavState extends State<BottomNav> {
                   child: Text("Add"),
                   style: TextButton.styleFrom(
                     foregroundColor: Colors.white,
-                    backgroundColor: Colors.orange[500],
+                    backgroundColor: const Color.fromARGB(224, 255, 59, 24),
                   ),
                 ),
               ],),
@@ -117,7 +120,7 @@ class _BottomNavState extends State<BottomNav> {
               inputTask();
             },
             child: Icon(Icons.add, color: Colors.white, size: 28),
-            backgroundColor: Colors.orange.shade400,
+            backgroundColor: const Color.fromARGB(224, 255, 59, 24),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -129,7 +132,7 @@ class _BottomNavState extends State<BottomNav> {
           leftCornerRadius: 32,
           rightCornerRadius: 32,
           onTap: (index) => setState(() => _bottomNavIndex = index),
-          activeColor: Colors.orange.shade600,
+          activeColor: const Color.fromARGB(224, 255, 59, 24),
       ),
     );
   }
